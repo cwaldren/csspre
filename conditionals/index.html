@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8 lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Conditional statements, &lt;code&gt;if&lt;/code&gt; and &lt;code&gt;else&lt;/code&gt; conditions, ternary operators, places that you can use conditionals" />
+    <meta name="keywords" content="css, preprocessors, preprocessor, less, sass, scss, stylus" />
+    <link rel="alternate" type="application/rss+xml" title="CSS Preprocessors" href="http://csspre.com/rss.xml" />
+
+    <title>Conditionals ◩ CSS PREprocessors</title>
+
+    <link  rel="stylesheet" href="/styles/styles.css" />
+    <link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-50631028-1', 'csspre.com');
+      ga('require', 'displayfeatures');
+      ga('require', 'linkid', 'linkid.js');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <header>
+      
+        <h2 class="site-title">
+          <a href="/" class="logo__text big-link">CSS PREprocessors</a>
+        </h2>
+      
+      <nav class="site-navigation">
+        
+          <a href="/" class="inactive">
+            Blog
+          </a>
+        
+          <a href="/compare" class="inactive">
+            Compare
+          </a>
+        
+          <a href="/compile" class="inactive">
+            Compile
+          </a>
+        
+          <a href="/convert" class="inactive">
+            Convert
+          </a>
+        
+          <a href="/about" class="inactive">
+            About
+          </a>
+        
+      </nav>
+    </header>
+
+    
+    <section class="site" itemscope itemtype="http://schema.org/Article">
+      <h1 class="page-title" itemprop="name">Conditionals</h1>
+    
+      
+      <input type="checkbox" id="sass-syntax" />
+<label for="sass-syntax" id="sass-syntax-badge" title="Toggle between the two syntaxes of Sass">SCSS Sass</label>
+
+<div class="meta">
+  <time datetime="2014-09-28" itemprop="datePublished">
+    2014-09-28
+  </time>
+  by
+  <a href="https://plus.google.com/+AlexanderFutekov" rel="author" itemprop="author">Alexander Futekov</a>
+</div>
+
+<div class="post" itemprop="articleBody">
+  <p>If/else conditions are incredibly useful when you want a part of your code to depend on something else. This gives maximum flexibility to write the type of logic that meets your needs.</p>
+<h2 id="conditionals-inside-declarations">Conditionals inside declarations</h2>
+<p>Supoort for <code>if</code> statements within a declaration. Less uses a slightly unconventional syntax, but works as expected.</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="ConditionalsBasicLess" data-csspre='less' data-type="css" ><code>.if-condition {
+  foo: bar;
+  &amp; when (1 = 1) {
+    baz: qux;
+  }
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="ConditionalsBasicScss" data-csspre='scss' data-type="css" ><code>.if-condition {
+  foo: bar;
+  @if 1 == 1 {
+    baz: qux;
+  }
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ConditionalsBasicSass" data-csspre='sass' data-type="css" ><code>.if-condition
+  foo: bar
+  @if 1 == 1
+    baz: qux
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ConditionalsBasicStylus" data-csspre='stylus' data-type="css" ><code>.if-condition
+  foo: bar
+  if 1 == 1
+    baz: qux
+</code></pre></div><div class="col-6 css"><pre name="css" id="ConditionalsBasicCss"  data-type="css" ><code>.if-condition {
+  foo: bar;
+  baz: qux;
+}
+</code></pre></div></div>
+
+
+
+<h2 id="ternary-operators">Ternary operators</h2>
+<p>Ternary operators allow for a single-line if/else test in the format of <code>x &gt; 0 ? true : false</code>.</p>
+<div class="grid"><div class="col-6 scss"><pre name="scss" id="ConditionalsTernaryScss" data-csspre='scss' data-type="css" ><code>.if-ternary {
+  one-equals-one: if(1 == 1, true, false);
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ConditionalsTernarySass" data-csspre='sass' data-type="css" ><code>.if-ternary
+  one-equals-one: if(1 == 1, true, false)
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ConditionalsTernaryStylus" data-csspre='stylus' data-type="css" ><code>.if-ternary
+  one-equals-one: 1 == 1 ? true : false
+</code></pre></div><div class="col-12 css"><pre name="css" id="ConditionalsTernaryCss"  data-type="css" ><code>.if-ternary {
+  one-equals-one: true;
+}
+</code></pre></div></div>
+
+
+
+<h2 id="interpolate-conditionals-inside-properties">Interpolate conditionals inside properties</h2>
+<p>Ability to interpolate <code>if</code> statements inside property names.</p>
+<div class="grid"><div class="col-6 scss"><pre name="scss" id="ConditionalsPropertyScss" data-csspre='scss' data-type="css" ><code>.if-within-property {
+  #{if(1 == 1, &quot;property&quot;, &quot;false&quot;)}: bar;
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ConditionalsPropertySass" data-csspre='sass' data-type="css" ><code>.if-within-property
+  #{if(1 == 1, &quot;property&quot;, &quot;false&quot;)}: bar
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ConditionalsPropertyStylus" data-csspre='stylus' data-type="css" ><code>.if-within-property
+  {1 == 1 ? &quot;property&quot; : &quot;false&quot;}: bar
+</code></pre></div><div class="col-12 css"><pre name="css" id="ConditionalsPropertyCss"  data-type="css" ><code>.if-within-property {
+  property: bar;
+}
+</code></pre></div></div>
+
+
+
+<h2 id="interpolate-conditionals-inside-selectors">Interpolate conditionals inside selectors</h2>
+<p>Ability to interpolate <code>if</code> statements inside selectors - there probably aren&#39;t a lot of use cases for using tests inside a selector but one never knows.</p>
+<div class="grid"><div class="col-6 scss"><pre name="scss" id="ConditionalsSelectorScss" data-csspre='scss' data-type="css" ><code>.if-within-selector--#{if(1 == 1, &quot;true&quot;, &quot;false&quot;)} {
+  foo: bar;
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ConditionalsSelectorSass" data-csspre='sass' data-type="css" ><code>.if-within-selector--#{if(1 == 1, &quot;true&quot;, &quot;false&quot;)}
+  foo: bar
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ConditionalsSelectorStylus" data-csspre='stylus' data-type="css" ><code>$if-result = 1 == 1 ? &quot;true&quot; : &quot;false&quot;
+
+.if-within-selector--{$if-result}
+  foo: bar
+</code></pre></div><div class="col-12 css"><pre name="css" id="ConditionalsSelectorCss"  data-type="css" ><code>.if-within-selector--true {
+  foo: bar;
+}
+</code></pre></div></div>
+</div>
+
+</section>
+<section class="site">
+
+<h2>Interactive</h2>
+<p>This article is far from perfect, you can <a href="https://github.com/futekov/csspre/blob/master/src/documents/conditionals.html.md.eco" target="_blank">suggest improvements on GitHub</a> or leave a comment below.</p>
+
+<script src="/scripts/code-edit.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/addon/runmode/runmode-standalone.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/mode/css/css.min.js"></script>
+<script>
+  var myNodeList = document.querySelectorAll('pre[data-type="css"] > code');
+  [].forEach.call(myNodeList, function (item) {
+    var codeString = item.textContent;
+    CodeMirror.runMode(codeString, "text/x-scss", item);
+  });
+</script>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'csspre';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+
+  </body>
+</html>

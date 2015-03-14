@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8 lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Add magic to your selectors and reduce repetition with the parent reference - &lt;code&gt;&amp;amp;&lt;/code&gt;, useful for BEM fans" />
+    <meta name="keywords" content="css, preprocessors, preprocessor, less, sass, scss, stylus" />
+    <link rel="alternate" type="application/rss+xml" title="CSS Preprocessors" href="http://csspre.com/rss.xml" />
+
+    <title>Parent Reference ◩ CSS PREprocessors</title>
+
+    <link  rel="stylesheet" href="/styles/styles.css" />
+    <link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-50631028-1', 'csspre.com');
+      ga('require', 'displayfeatures');
+      ga('require', 'linkid', 'linkid.js');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <header>
+      
+        <h2 class="site-title">
+          <a href="/" class="logo__text big-link">CSS PREprocessors</a>
+        </h2>
+      
+      <nav class="site-navigation">
+        
+          <a href="/" class="inactive">
+            Blog
+          </a>
+        
+          <a href="/compare" class="inactive">
+            Compare
+          </a>
+        
+          <a href="/compile" class="inactive">
+            Compile
+          </a>
+        
+          <a href="/convert" class="inactive">
+            Convert
+          </a>
+        
+          <a href="/about" class="inactive">
+            About
+          </a>
+        
+      </nav>
+    </header>
+
+    
+    <section class="site" itemscope itemtype="http://schema.org/Article">
+      <h1 class="page-title" itemprop="name">Parent Reference</h1>
+    
+      
+      <input type="checkbox" id="sass-syntax" />
+<label for="sass-syntax" id="sass-syntax-badge" title="Toggle between the two syntaxes of Sass">SCSS Sass</label>
+
+<div class="meta">
+  <time datetime="2014-06-20" itemprop="datePublished">
+    2014-06-20
+  </time>
+  by
+  <a href="https://plus.google.com/+AlexanderFutekov" rel="author" itemprop="author">Alexander Futekov</a>
+</div>
+
+<div class="post" itemprop="articleBody">
+  <p>So you&#39;ve discovered that preprocessors support nesting stuff, you use it here and there and after a while you want to be able to do more than setting a child selector.</p>
+<p>Well, you can.</p>
+<p>It&#39;s called a parent reference - <code>&amp;</code>, and it allows you to do some pretty cool stuff.</p>
+<h2 id="selector-append">Selector append</h2>
+<p>With the parent reference, you can easily attach a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">pseudo class</a> to the selector:</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="ParentReferenceAppendLess" data-csspre='less' data-type="css" ><code>.selector-append {
+  foo: bar;
+  &amp;:hover {
+    baz: qux;
+  }
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="ParentReferenceAppendScss" data-csspre='scss' data-type="css" ><code>.selector-append {
+  foo: bar;
+  &amp;:hover {
+    baz: qux;
+  }
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ParentReferenceAppendSass" data-csspre='sass' data-type="css" ><code>.selector-append
+  foo: bar
+  &amp;:hover
+    baz: qux
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ParentReferenceAppendStylus" data-csspre='stylus' data-type="css" ><code>.selector-append
+  foo: bar
+  &amp;:hover
+    baz: qux
+</code></pre></div><div class="col-6 css"><pre name="css" id="ParentReferenceAppendCss"  data-type="css" ><code>.selector-append {
+  foo: bar;
+}
+.selector-append:hover {
+  baz: qux;
+}
+</code></pre></div></div>
+
+<p>You can also add <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors">class</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors">id</a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">attribute</a> selectors in this way.</p>
+<h2 id="extend-the-name-of-the-selector">Extend the name of the selector</h2>
+<p>If you need to extend the name of a selector you can do it in the same way as above:</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="ParentReferenceExtendNameLess" data-csspre='less' data-type="css" ><code>.extend-name {
+  &amp;-one {
+    foo: bar;
+  }
+  &amp;two {
+    baz: qux
+  }
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="ParentReferenceExtendNameScss" data-csspre='scss' data-version='3.3.0' data-type="css" ><code>.extend-name {
+  &amp;-one {
+    foo: bar;
+  }
+  &amp;two {
+    baz: qux;
+  }
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ParentReferenceExtendNameSass" data-csspre='sass' data-version='3.3.0' data-type="css" ><code>.extend-name
+  &amp;-one
+    foo: bar
+  &amp;two
+    baz: qux
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ParentReferenceExtendNameStylus" data-csspre='stylus' data-type="css" ><code>.extend-name
+  &amp;-one
+    foo: bar
+  &amp;two
+    baz: qux
+</code></pre></div><div class="col-6 css"><pre name="css" id="ParentReferenceExtendNameCss"  data-type="css" ><code>.extend-name-one {
+  foo: bar;
+}
+.extend-nametwo {
+  baz: qux;
+}
+</code></pre></div></div>
+
+<p>This allows for BEM-like names in your CSS. You can read more about this technique from these articles:</p>
+<ul>
+<li><a href="http://www.alwaystwisted.com/post.php?s=2014-02-27-even-easier-bem-ing-with-sass-33">Even Easier BEM-ing with Sass 3.3</a></li>
+<li><a href="http://mikefowler.me/2013/10/17/support-for-bem-modules-sass-3.3/">Support for BEM modules in Sass 3.3</a></li>
+<li><a href="http://jonsuh.com/blog/sass-bem-selector-and-trailing-ampersand/">Sass BEM-Selector Support and Trailing Ampersand</a></li>
+</ul>
+<h2 id="parent-selector">Parent selector</h2>
+<p>We can also have a trailing ampersand - when we put it after...</p>
+<p>By having a trailing parent reference, you can add a parent selector:</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="ParentReferenceParentLess" data-csspre='less' data-type="css" ><code>.parent-selector {
+  foo: bar;
+  .ie7 &amp; {
+    baz: qux;
+  }
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="ParentReferenceParentScss" data-csspre='scss' data-type="css" ><code>.parent-selector {
+  foo: bar;
+  .ie7 &amp; {
+    baz: qux;
+  }
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ParentReferenceParentSass" data-csspre='sass' data-type="css" ><code>.parent-selector
+  foo: bar
+  .ie7 &amp;
+    baz: qux
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ParentReferenceParentStylus" data-csspre='stylus' data-type="css" ><code>.parent-selector
+  foo: bar
+  .ie7 &amp;
+    baz: qux
+</code></pre></div><div class="col-6 css"><pre name="css" id="ParentReferenceParentCss"  data-type="css" ><code>.parent-selector {
+  foo: bar;
+}
+.ie7 .parent-selector {
+  baz: qux;
+}
+</code></pre></div></div>
+
+<p>This can be used to target browsers if we use the classic ie targeting solution <a href="http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">as described by Paul Irish</a>.</p>
+<p>Another case where the parent selector can be useful is for parent element states where the children get specific classes.</p>
+<h2 id="selector-prepend">Selector prepend</h2>
+<p>Appending selectors might work when you are appending a class, id, or attribute selector, but what if we need to add a html element like <code>ol</code> to <code>.test</code>? With selector appending we will end up with <code>.testol</code> which is not what we want. For cases like this we need to prepend the selector.</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="ParentReferencePrependLess" data-csspre='less' data-type="css" ><code>.selector-prepend {
+  foo: bar;
+  ol&amp; {
+    baz: qux
+  }
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="ParentReferencePrependScss" data-csspre='scss' data-version='3.4.0' data-type="css" ><code>.selector-prepend {
+  foo: bar;
+  @at-root ol#{&amp;} {
+    baz: qux
+  }
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ParentReferencePrependSass" data-csspre='sass' data-version='3.4.0' data-type="css" ><code>.selector-prepend
+  foo: bar
+  @at-root ol#{&amp;}
+    baz: qux
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ParentReferencePrependStylus" data-csspre='stylus' data-type="css" ><code>.selector-prepend
+  foo: bar
+  ol&amp;
+    baz: qux
+</code></pre></div><div class="col-6 css"><pre name="css" id="ParentReferencePrependCss"  data-type="css" ><code>.selector-prepend {
+  foo: bar;
+}
+ol.selector-prepend {
+  baz: qux;
+}
+</code></pre></div></div>
+
+
+
+<h2 id="multiple-parent-references">Multiple parent references</h2>
+<p>Need something weirder with a repeating class in the selector for example? No problem, just use several ampersands and chain the appropriately:</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="ParentReferenceMultipleLess" data-csspre='less' data-type="css" ><code>.multi-reference {
+  foo: bar;
+  &amp; + &amp; {
+    baz: qux;
+  }
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="ParentReferenceMultipleScss" data-csspre='scss' data-type="css" ><code>.multi-reference {
+  foo: bar;
+  &amp; + &amp; {
+    baz: qux;
+  }
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ParentReferenceMultipleSass" data-csspre='sass' data-type="css" ><code>.multi-reference
+  foo: bar
+  &amp; + &amp;
+    baz: qux
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ParentReferenceMultipleStylus" data-csspre='stylus' data-type="css" ><code>.multi-reference
+  foo: bar
+  &amp; + &amp;
+    baz: qux
+</code></pre></div><div class="col-6 css"><pre name="css" id="ParentReferenceMultipleCss"  data-type="css" ><code>.multi-reference {
+  foo: bar;
+}
+.multi-reference + .multi-reference {
+  baz: qux;
+}
+</code></pre></div></div>
+
+
+
+<h2 id="combinatorial-explosion">Combinatorial explosion</h2>
+<p>The idea for combinatorial explosion <a href="http://lesscss.org/features/#parent-selectors-feature-combinatorial-explosion">comes from Less</a> and it can be useful for covering many combinations of selectors. Simulating it in Sass and Stylus is also possible.</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="ParentReferenceExplosionLess" data-csspre='less' data-type="css" ><code>p, ul, ol {
+  foo: bar;
+  &amp; + &amp; {
+    baz: qux;
+  }
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="ParentReferenceExplosionScss" data-csspre='scss' data-type="css" ><code>$selectors: &quot;p, ul, ol&quot;;
+
+#{$selectors} {
+  foo: bar;
+  &amp; + {
+    #{$selectors} {
+      baz: qux;
+    }
+  }
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ParentReferenceExplosionSass" data-csspre='sass' data-type="css" ><code>$selectors: &quot;p, ul, ol&quot;
+
+#{$selectors}
+  foo: bar
+  &amp; +
+    #{$selectors}
+      baz: qux
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ParentReferenceExplosionStylus" data-csspre='stylus' data-type="css" ><code>$selectors = &quot;p, ul, ol&quot;
+
+{$selectors}
+  foo: bar
+  &amp; +
+    {$selectors}
+      baz: qux
+</code></pre></div><div class="col-6 css"><pre name="css" id="ParentReferenceExplosionCss"  data-type="css" ><code>p,
+ul,
+ol {
+  foo: bar;
+}
+p + p,
+p + ul,
+p + ol,
+ul + p,
+ul + ul,
+ul + ol,
+ol + p,
+ol + ul,
+ol + ol {
+  baz: qux;
+}
+</code></pre></div></div>
+
+<p>This technique might be useful not only for adding space between elements that are direct siblings (the <code>+</code> selector), but also for covering direct descendants (the <code>&gt;</code> selector).</p>
+<h2 id="root-directive">Root directive</h2>
+<p>The root directive/reference will move anything below it to the root level - therefore it will not inherit the selector it&#39;s nested under.</p>
+<p>One use case inspired by the <a href="http://www.alwaystwisted.com/articles/2014-03-08-using-sass-33s-at-root-for-piece-of-mind">excellent Stu Robson</a> is positioning an animation declaration only where it&#39;s used. If we also put the animation name in a variable we end up with code that is orderly and less prone to errors.</p>
+<div class="grid"><div class="col-6 scss"><pre name="scss" id="ParentReferenceRootScss" data-csspre='scss' data-version='3.3.0' data-type="css" ><code>.text {
+  $anim-name: bounce;
+  margin-top: 0;
+  &amp;:hover {
+    animation: $anim-name 0.8s infinite ease-in alternate;
+  }
+  @at-root {
+    @keyframes #{$anim-name} {
+      50% {
+        margin-top: -.5em;
+      }
+    }
+  }
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ParentReferenceRootSass" data-csspre='sass' data-version='3.3.0' data-type="css" ><code>.text
+  $anim-name: bounce
+  margin-top: 0
+  &amp;:hover
+    animation: $anim-name .8s infinite ease-in alternate
+  @at-root
+    @keyframes #{$anim-name}
+      50%
+        margin-top: -.5em
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ParentReferenceRootStylus" data-csspre='stylus' data-version='0.42.0' data-type="css" ><code>.text
+  $anim-name = bounce
+  margin-top: 0
+  &amp;:hover
+    animation: $anim-name .8s infinite ease-in alternate
+  /
+    vendors = official
+    @keyframes $anim-name
+      50%
+        margin-top: -.5em
+</code></pre></div><div class="col-12 css"><pre name="css" id="ParentReferenceRootCss"  data-type="css" ><code>.text {
+  margin-top: 0;
+}
+.text:hover {
+  animation: bounce 0.8s infinite ease-in alternate;
+}
+@keyframes bounce {
+  50% {
+    margin-top: -0.5em;
+  }
+}
+</code></pre></div></div>
+</div>
+
+</section>
+<section class="site">
+
+<h2>Interactive</h2>
+<p>This article is far from perfect, you can <a href="https://github.com/futekov/csspre/blob/master/src/documents/parent-reference.html.md.eco" target="_blank">suggest improvements on GitHub</a> or leave a comment below.</p>
+
+<script src="/scripts/code-edit.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/addon/runmode/runmode-standalone.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/mode/css/css.min.js"></script>
+<script>
+  var myNodeList = document.querySelectorAll('pre[data-type="css"] > code');
+  [].forEach.call(myNodeList, function (item) {
+    var codeString = item.textContent;
+    CodeMirror.runMode(codeString, "text/x-scss", item);
+  });
+</script>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'csspre';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+
+  </body>
+</html>

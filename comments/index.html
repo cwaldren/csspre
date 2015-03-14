@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8 lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="When to use single-line &lt;code&gt;// ...&lt;/code&gt; and block &lt;code&gt;/* ... */&lt;/code&gt; comments, quirks you should be aware of" />
+    <meta name="keywords" content="css, preprocessors, preprocessor, less, sass, scss, stylus" />
+    <link rel="alternate" type="application/rss+xml" title="CSS Preprocessors" href="http://csspre.com/rss.xml" />
+
+    <title>Comments ◩ CSS PREprocessors</title>
+
+    <link  rel="stylesheet" href="/styles/styles.css" />
+    <link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-50631028-1', 'csspre.com');
+      ga('require', 'displayfeatures');
+      ga('require', 'linkid', 'linkid.js');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <header>
+      
+        <h2 class="site-title">
+          <a href="/" class="logo__text big-link">CSS PREprocessors</a>
+        </h2>
+      
+      <nav class="site-navigation">
+        
+          <a href="/" class="inactive">
+            Blog
+          </a>
+        
+          <a href="/compare" class="inactive">
+            Compare
+          </a>
+        
+          <a href="/compile" class="inactive">
+            Compile
+          </a>
+        
+          <a href="/convert" class="inactive">
+            Convert
+          </a>
+        
+          <a href="/about" class="inactive">
+            About
+          </a>
+        
+      </nav>
+    </header>
+
+    
+    <section class="site" itemscope itemtype="http://schema.org/Article">
+      <h1 class="page-title" itemprop="name">Comments</h1>
+    
+      
+      <input type="checkbox" id="sass-syntax" />
+<label for="sass-syntax" id="sass-syntax-badge" title="Toggle between the two syntaxes of Sass">SCSS Sass</label>
+
+<div class="meta">
+  <time datetime="2014-07-01" itemprop="datePublished">
+    2014-07-01
+  </time>
+  by
+  <a href="https://plus.google.com/+AlexanderFutekov" rel="author" itemprop="author">Alexander Futekov</a>
+</div>
+
+<div class="post" itemprop="articleBody">
+  <p>Commenting your CSS is important, it is even more important for preprocessors, where you may write some weird-looking things to achieve a specific output or to workaround a preprocessor bug.</p>
+<p>It is therefore important to know well the types of comments that are allowed in the different preprocessors.</p>
+<p>Additionally, if you decide to use a living style guide you can build one with comments in your preprocessor files. Some good tools to achieve this are <a href="http://kaleistyleguide.com/">Kalei Style Guide</a>, <a href="http://jacobrask.github.io/styledocco/">StyleDocco</a>, and <a href="http://hughsk.io/kss-node/">Knyle Style Sheets</a>.</p>
+<h2 id="types-of-comments">Types of comments</h2>
+<table class="table-content">
+  <caption>Comments appearing in the compiled CSS?</caption>
+  <thead>
+    <tr>
+      <th rowspan="2"></th>
+      <th rowspan="2">Less</th>
+      <th colspan="3">Sass</th>
+      <th colspan="2">Stylus</th>
+    </tr>
+    <tr>
+      <th>expanded, nested</th>
+      <th>compact</th>
+      <th>compressed</th>
+      <th>expanded</th>
+      <th>compressed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>
+        Single-line comments<br>
+        <code>// foo</code>
+      </th>
+      <td>No</td>
+      <td colspan="3">No</td>
+      <td colspan="2">No</td>
+    </tr>
+    <tr>
+      <th>
+        Block comments<br>
+        <code>/*<br>&nbsp;* foo<br>&nbsp;*/</code>
+      </th>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes, (output is on a single line)</td>
+      <td>No</td>
+      <td>Yes (except if declared in imported .styl file*)</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>
+        Block comments - alternative<br>
+        <code>/* foo<br>&nbsp;bar<br>&nbsp;baz */</code>
+      </th>
+      <td>Yes</td>
+      <td>Yes, (output has star on every line)</td>
+      <td>Yes, (output is on a single line)</td>
+      <td>No</td>
+      <td>Yes (except if declared in imported .styl file*)</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>
+        Loud block comments<br>
+        <code>/*!<br>&nbsp;* foo<br>&nbsp;* /</code>
+      </th>
+      <td>Yes</td>
+      <td colspan="3">Yes (output keeps the <b>!</b>)</td>
+      <td colspan="2">Yes</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>* You can <a href="https://github.com/LearnBoost/stylus/issues/1389">read more</a> about this <a href="https://github.com/LearnBoost/stylus/pull/935">behavior of Stylus</a>.</p>
+
+</div>
+
+</section>
+<section class="site">
+
+<h2>Interactive</h2>
+<p>This article is far from perfect, you can <a href="https://github.com/futekov/csspre/blob/master/src/documents/comments.html.md.eco" target="_blank">suggest improvements on GitHub</a> or leave a comment below.</p>
+
+<script src="/scripts/code-edit.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/addon/runmode/runmode-standalone.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/mode/css/css.min.js"></script>
+<script>
+  var myNodeList = document.querySelectorAll('pre[data-type="css"] > code');
+  [].forEach.call(myNodeList, function (item) {
+    var codeString = item.textContent;
+    CodeMirror.runMode(codeString, "text/x-scss", item);
+  });
+</script>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'csspre';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+
+  </body>
+</html>

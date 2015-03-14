@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8 lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Create loops, iterate through items or lists of items, use &lt;code&gt;for&lt;/code&gt;, &lt;code&gt;each&lt;/code&gt;, and &lt;code&gt;while&lt;/code&gt; directives" />
+    <meta name="keywords" content="css, preprocessors, preprocessor, less, sass, scss, stylus" />
+    <link rel="alternate" type="application/rss+xml" title="CSS Preprocessors" href="http://csspre.com/rss.xml" />
+
+    <title>Loops ◩ CSS PREprocessors</title>
+
+    <link  rel="stylesheet" href="/styles/styles.css" />
+    <link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-50631028-1', 'csspre.com');
+      ga('require', 'displayfeatures');
+      ga('require', 'linkid', 'linkid.js');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <header>
+      
+        <h2 class="site-title">
+          <a href="/" class="logo__text big-link">CSS PREprocessors</a>
+        </h2>
+      
+      <nav class="site-navigation">
+        
+          <a href="/" class="inactive">
+            Blog
+          </a>
+        
+          <a href="/compare" class="inactive">
+            Compare
+          </a>
+        
+          <a href="/compile" class="inactive">
+            Compile
+          </a>
+        
+          <a href="/convert" class="inactive">
+            Convert
+          </a>
+        
+          <a href="/about" class="inactive">
+            About
+          </a>
+        
+      </nav>
+    </header>
+
+    
+    <section class="site" itemscope itemtype="http://schema.org/Article">
+      <h1 class="page-title" itemprop="name">Loops</h1>
+    
+      
+      <input type="checkbox" id="sass-syntax" />
+<label for="sass-syntax" id="sass-syntax-badge" title="Toggle between the two syntaxes of Sass">SCSS Sass</label>
+
+<div class="meta">
+  <time datetime="2014-06-27" itemprop="datePublished">
+    2014-06-27
+  </time>
+  by
+  <a href="https://plus.google.com/+AlexanderFutekov" rel="author" itemprop="author">Alexander Futekov</a>
+</div>
+
+<div class="post" itemprop="articleBody">
+  <p>Loops are useful when you need to create a set of selectors/values that have an underlying mathematical relation of some sort.</p>
+<h2 id="basic-loop">Basic loop</h2>
+<p>Let&#39;s build something simple - a very basic grid system with four columns.</p>
+<p>We will put the columns class name and their number in variables and utilize them through <a href="/variables#interpolating-variables">variable interpolation</a>.</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="LoopsBasicLess" data-csspre='less' data-type="css" ><code>@column-name: col;
+@column-count: 4;
+
+.generate-column(@i: 1) when (@i =&lt; @column-count) {
+  .@{column-name}-@{i} {
+    width: @i &#42; (100% / @column-count);
+  }
+  .generate-column(@i + 1);
+}
+
+.generate-column();
+</code></pre></div><div class="col-6 less"><pre name="less" id="LoopsBasicLessAlt" data-csspre='less' data-type="css" ><code>@column-name: col;
+@column-count: 4;
+
+.@{column-name} {
+  .-(@i: 1) when (@i =&lt; @column-count) {
+    &amp;-@{i} {
+      width: @i &#42; (100% / @column-count);
+    }.-(@i + 1);
+  }.-;
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="LoopsBasicScss" data-csspre='scss' data-type="css" ><code>$column-name: col;
+$column-count: 4;
+
+@for $i from 1 through $column-count {
+  .#{$column-name}-#{$i} {
+    width: $i &#42; (100% / $column-count);
+  }
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="LoopsBasicSass" data-csspre='sass' data-type="css" ><code>$column-name: col
+$column-count: 4
+
+@for $i from 1 through $column-count
+  .#{$column-name}-#{$i}
+    width: $i &#42; (100% / $column-count)
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="LoopsBasicStylus" data-csspre='stylus' data-type="css" ><code>$column-name = col
+$column-count = 4
+
+for $i in 1..$column-count
+  .{$column-name}-{$i}
+    width: $i &#42; (100% / $column-count)
+</code></pre></div><div class="col-12 css"><pre name="css" id="LoopsBasicCss"  data-type="css" ><code>.col-1 {
+  width: 25%;
+}
+.col-2 {
+  width: 50%;
+}
+.col-3 {
+  width: 75%;
+}
+.col-4 {
+  width: 100%;
+}
+</code></pre></div></div>
+
+<p>You will notice that Less offers two ways to write a loop, the first way is standard with a <a href="/mixins#mixin-basics">mixin</a> that is later called. The second one is a bit hacky and much uglier, but doesn&#39;t require calling the mixin later.</p>
+<p>In all of the preprocessors you can have both inclusive ranges and exclusive ones. For Less an inclusive range can be achieved with <code>=&lt;</code> and for an exclusive one - <code>&lt;</code>. In Sass inclusive ranges use <code>through</code> and exclusive - <code>to</code>. For Stylus inclusive ranges are written with <code>..</code> and exclusive - <code>...</code>.</p>
+<h2 id="leveling-up">Leveling up</h2>
+<p>Often when you do a loop you want to iterate through something more than numbers, probably a list of colors or some other values. Here is an example of how you can create numbered selectors with values, extracted from a variable.</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="LoopsIntermediateLess" data-csspre='less' data-type="css" ><code>@colors: foo, bar, baz;
+
+.color-mixin(@i: 1) when (@i =&lt; length(@colors)) {
+  &amp;.color-@{i} {
+    background: extract(@colors, @i);
+  }
+  .color-mixin(@i + 1);
+};
+.color-mixin();
+</code></pre></div><div class="col-6 less"><pre name="less" id="LoopsIntermediateLessAlt" data-csspre='less' data-type="css" ><code>@colors: foo, bar, baz;
+
+.color {
+  .-(@i: 1) when (@i =&lt; length(@colors)) {
+    &amp;-@{i} {
+      background: extract(@colors, @i);
+    }
+    .-((@i + 1));
+  } .-;
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="LoopsIntermediateScss" data-csspre='scss' data-type="css" ><code>$colors: foo, bar, baz;
+
+@for $i from 1 through length($colors) {
+  .color-#{$i} {
+    background: #{nth($colors, $i)};
+  }
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="LoopsIntermediateScssAlt" data-csspre='scss' data-type="css" ><code>$colors: foo, bar, baz;
+
+@each $color in $colors {
+  $i: index($colors, $color);
+  .color-#{$i} {
+    background: $color;
+  }
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="LoopsIntermediateSass" data-csspre='sass' data-type="css" ><code>$colors: foo, bar, baz
+
+@for $i from 1 through length($colors)
+  .color-#{$i}
+    background: #{nth($colors, $i)}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="LoopsIntermediateSassAlt" data-csspre='sass' data-type="css" ><code>$colors: foo, bar, baz
+
+@each $color in $colors
+  $i: index($colors, $color)
+  .color-#{$i}
+    background: $color
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="LoopsIntermediateStylus" data-csspre='stylus' data-type="css" ><code>$colors = foo, bar, baz
+
+for $color, $i in $colors
+  .color-{$i + 1}
+    background: $color
+</code></pre></div><div class="col-6 css"><pre name="css" id="LoopsIntermediateCss"  data-type="css" ><code>.color-1 {
+  background: foo;
+}
+.color-2 {
+  background: bar;
+}
+.color-3 {
+  background: baz;
+}
+</code></pre></div></div>
+
+<p>In addition to an index-based iteration, Sass can also iterate through values directly. As Sass <a href="https://github.com/sass/sass/issues/996">does not yet provide</a> an index variable when iterating values, we have to retrieve it manually.</p>
+
+</div>
+
+</section>
+<section class="site">
+
+<h2>Interactive</h2>
+<p>This article is far from perfect, you can <a href="https://github.com/futekov/csspre/blob/master/src/documents/loops.html.md.eco" target="_blank">suggest improvements on GitHub</a> or leave a comment below.</p>
+
+<script src="/scripts/code-edit.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/addon/runmode/runmode-standalone.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/mode/css/css.min.js"></script>
+<script>
+  var myNodeList = document.querySelectorAll('pre[data-type="css"] > code');
+  [].forEach.call(myNodeList, function (item) {
+    var codeString = item.textContent;
+    CodeMirror.runMode(codeString, "text/x-scss", item);
+  });
+</script>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'csspre';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+
+  </body>
+</html>

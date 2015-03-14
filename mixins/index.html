@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8 lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="How to use mixins: with and without parameters; with defaults; with an unknown number of mixin arguments" />
+    <meta name="keywords" content="css, preprocessors, preprocessor, less, sass, scss, stylus" />
+    <link rel="alternate" type="application/rss+xml" title="CSS Preprocessors" href="http://csspre.com/rss.xml" />
+
+    <title>Mixins ◩ CSS PREprocessors</title>
+
+    <link  rel="stylesheet" href="/styles/styles.css" />
+    <link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-50631028-1', 'csspre.com');
+      ga('require', 'displayfeatures');
+      ga('require', 'linkid', 'linkid.js');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <header>
+      
+        <h2 class="site-title">
+          <a href="/" class="logo__text big-link">CSS PREprocessors</a>
+        </h2>
+      
+      <nav class="site-navigation">
+        
+          <a href="/" class="inactive">
+            Blog
+          </a>
+        
+          <a href="/compare" class="inactive">
+            Compare
+          </a>
+        
+          <a href="/compile" class="inactive">
+            Compile
+          </a>
+        
+          <a href="/convert" class="inactive">
+            Convert
+          </a>
+        
+          <a href="/about" class="inactive">
+            About
+          </a>
+        
+      </nav>
+    </header>
+
+    
+    <section class="site" itemscope itemtype="http://schema.org/Article">
+      <h1 class="page-title" itemprop="name">Mixins</h1>
+    
+      
+      <input type="checkbox" id="sass-syntax" />
+<label for="sass-syntax" id="sass-syntax-badge" title="Toggle between the two syntaxes of Sass">SCSS Sass</label>
+
+<div class="meta">
+  <time datetime="2014-07-21" itemprop="datePublished">
+    2014-07-21
+  </time>
+  by
+  <a href="https://plus.google.com/+AlexanderFutekov" rel="author" itemprop="author">Alexander Futekov</a>
+</div>
+
+<div class="post" itemprop="articleBody">
+  <h2 id="mixin-basics">Mixin basics</h2>
+<p>Here is how to include a simple mixin, as you can see, the syntax is rather similar between the preprocessors.</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="MixinsBasicLess" data-csspre='less' data-type="css" ><code>.mixin() {
+  foo: bar;
+}
+
+.include-mixin {
+  .mixin;
+  baz: qux;
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="MixinsBasicScss" data-csspre='scss' data-type="css" ><code>@mixin mixin {
+  foo: bar;
+}
+
+.include-mixin {
+  @include mixin;
+  baz: qux;
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="MixinsBasicSass" data-csspre='sass' data-type="css" ><code>=mixin
+  foo: bar
+
+.include-mixin 
+  +mixin
+  baz: qux
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="MixinsBasicStylus" data-csspre='stylus' data-type="css" ><code>mixin()
+  foo: bar
+
+.include-mixin 
+  mixin()
+  baz: qux
+</code></pre></div><div class="col-6 css"><pre name="css" id="MixinsBasicCss"  data-type="css" ><code>.include-mixin {
+  foo: bar;
+  baz: qux;
+}
+</code></pre></div></div>
+
+
+<h2 id="mixin-parameters-and-parameter-defaults">Mixin parameters and parameter defaults</h2>
+<p>Mixins can receive one or multiple parameters.</p>
+<p>You can even set defaults for each of the parameters. When a parameter has a default value, you don&#39;t need to set one when calling the mixin - see how we can omit the <code>thickness</code> parameter.</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="MixinsParamsLess" data-csspre='less' data-type="css" ><code>.bordered(@color; @thickness: 1px) {
+  border: @thickness solid @color;
+}
+
+.mixins-params {
+  .bordered(#cbf40d);
+  .bordered(#d04fbc, 3px);
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="MixinsParamsScss" data-csspre='scss' data-type="css" ><code>@mixin bordered($color, $thickness: 1px) {
+  border: $thickness solid $color;
+}
+
+.mixins-params {
+  @include bordered(#cbf40d);
+  @include bordered(#d04fbc, 3px);
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="MixinsParamsSass" data-csspre='sass' data-type="css" ><code>=bordered($color, $thickness: 1px)
+  border: $thickness solid $color
+
+.mixins-params
+  +bordered(#cbf40d)
+  +bordered(#d04fbc, 3px)
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="MixinsParamsStylus" data-csspre='stylus' data-type="css" ><code>bordered($color, $thickness = 1px)
+  border: $thickness solid $color
+
+.mixins-params
+  bordered(#cbf40d)
+  bordered(#d04fbc, 3px)
+</code></pre></div><div class="col-6 css"><pre name="css" id="MixinsParamsCss"  data-type="css" ><code>.mixins-params {
+  border: 1px solid #cbf40d;
+  border: 3px solid #d04fbc;
+}
+</code></pre></div></div>
+
+
+
+<h2 id="named-parameters">Named parameters</h2>
+<p>If, for whatever reason, you want to set the parameters of a mixin in a particular order that is different that the one set in the mixin, you can do that by calling the mixin and explicitly state each of the parameters you&#39;re defining.</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="MixinsParamsNamedLess" data-csspre='less' data-type="css" ><code>.size(@w, @h) {
+  width: @w;
+  height: @h;
+}
+
+.mixins-named-params {
+  .size(@h: 10px, @w: 25px);
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="MixinsParamsNamedScss" data-csspre='scss' data-type="css" ><code>@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+.mixins-named-params {
+  @include size($h: 10px, $w: 25px);
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="MixinsParamsNamedSass" data-csspre='sass' data-type="css" ><code>=size($w, $h)
+  width: $w
+  height: $h
+
+.mixins-named-params
+  +size($h: 10px, $w: 25px)
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="MixinsParamsNamedStylus" data-csspre='stylus' data-type="css" ><code>size($w, $h)
+  width: $w
+  height: $h
+
+.mixins-named-params
+  size($h: 10px, $w: 25px)
+</code></pre></div><div class="col-6 css"><pre name="css" id="MixinsParamsNamedCss"  data-type="css" ><code>.mixins-named-params {
+  width: 25px;
+  height: 10px;
+}
+</code></pre></div></div>
+
+
+
+<h2 id="unknown-number-of-parameters">Unknown number of parameters</h2>
+<p>If you want to have a mixin with a varying number of parameters, all CSS preprocessors allow you output all arguments like so:</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="MixinsArgumentsLess" data-csspre='less' data-type="css" ><code>.transition(...) {
+  -webkit-transition: @arguments;
+  -moz-transition: @arguments;
+  transition: @arguments;
+}
+
+.mixins-arguments {
+  .transition(opacity 200ms);
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="MixinsArgumentsScss" data-csspre='scss' data-type="css" ><code>@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  transition: $args;
+}
+
+.mixins-arguments {
+  @include transition(opacity 200ms);
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="MixinsArgumentsSass" data-csspre='sass' data-type="css" ><code>=transition($args...)
+  -webkit-transition: $args
+  -moz-transition: $args
+  transition: $args
+
+.mixins-arguments
+  +transition(opacity 200ms)
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="MixinsArgumentsStylus" data-csspre='stylus' data-type="css" ><code>transition($args)
+  -webkit-transition: $args
+  -moz-transition: $args
+  transition: $args
+
+.mixins-arguments
+  transition(opacity 200ms)
+</code></pre></div><div class="col-6 css"><pre name="css" id="MixinsArgumentsCss"  data-type="css" ><code>.mixins-arguments {
+  -webkit-transition: opacity 200ms;
+  -moz-transition: opacity 200ms;
+  transition: opacity 200ms;
+}
+</code></pre></div></div>
+</div>
+
+</section>
+<section class="site">
+
+<h2>Interactive</h2>
+<p>This article is far from perfect, you can <a href="https://github.com/futekov/csspre/blob/master/src/documents/mixins.html.md.eco" target="_blank">suggest improvements on GitHub</a> or leave a comment below.</p>
+
+<script src="/scripts/code-edit.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/addon/runmode/runmode-standalone.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/mode/css/css.min.js"></script>
+<script>
+  var myNodeList = document.querySelectorAll('pre[data-type="css"] > code');
+  [].forEach.call(myNodeList, function (item) {
+    var codeString = item.textContent;
+    CodeMirror.runMode(codeString, "text/x-scss", item);
+  });
+</script>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'csspre';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+
+  </body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8 lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Helpers when working with images - automatically get image size or embed images in base64" />
+    <meta name="keywords" content="css, preprocessors, preprocessor, less, sass, scss, stylus" />
+    <link rel="alternate" type="application/rss+xml" title="CSS Preprocessors" href="http://csspre.com/rss.xml" />
+
+    <title>Image helpers ◩ CSS PREprocessors</title>
+
+    <link  rel="stylesheet" href="/styles/styles.css" />
+    <link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-50631028-1', 'csspre.com');
+      ga('require', 'displayfeatures');
+      ga('require', 'linkid', 'linkid.js');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <header>
+      
+        <h2 class="site-title">
+          <a href="/" class="logo__text big-link">CSS PREprocessors</a>
+        </h2>
+      
+      <nav class="site-navigation">
+        
+          <a href="/" class="inactive">
+            Blog
+          </a>
+        
+          <a href="/compare" class="inactive">
+            Compare
+          </a>
+        
+          <a href="/compile" class="inactive">
+            Compile
+          </a>
+        
+          <a href="/convert" class="inactive">
+            Convert
+          </a>
+        
+          <a href="/about" class="inactive">
+            About
+          </a>
+        
+      </nav>
+    </header>
+
+    
+    <section class="site" itemscope itemtype="http://schema.org/Article">
+      <h1 class="page-title" itemprop="name">Image helpers</h1>
+    
+      
+      <input type="checkbox" id="sass-syntax" />
+<label for="sass-syntax" id="sass-syntax-badge" title="Toggle between the two syntaxes of Sass">SCSS Sass</label>
+
+<div class="meta">
+  <time datetime="2015-01-21" itemprop="datePublished">
+    2015-01-21
+  </time>
+  by
+  <a href="https://plus.google.com/+AlexanderFutekov" rel="author" itemprop="author">Alexander Futekov</a>
+</div>
+
+<div class="post" itemprop="articleBody">
+  <p>If/else conditions are incredibly useful when you want a part of your code to depend on something else. This gives maximum flexibility to write the type of logic that meets your needs.</p>
+<h2 id="image-size">Image size</h2>
+<p>If you need the exact dimensions of an image all preprocessors have a way to do that instead of you.</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="ImageHelpersDimensionsLess" data-csspre='less' data-version='2.2.0' data-type="css"  data-local><code>.image {
+  bg-size: image-size(&quot;img.png&quot;);
+  bg-width: image-width(&quot;img.png&quot;);
+  bg-height: image-height(&quot;img.png&quot;);
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="ImageHelpersDimensionsScss" data-csspre='scss' data-type="css"  data-local><code>.image {
+  bg-size: image-width(&quot;img.png&quot;) image-height(&quot;img.png&quot;);
+  bg-width: image-width(&quot;img.png&quot;);
+  bg-height: image-height(&quot;img.png&quot;);
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ImageHelpersDimensionsSass" data-csspre='sass' data-type="css"  data-local><code>.image
+  bg-size: image-width(&quot;img.png&quot;) image-height(&quot;img.png&quot;)
+  bg-width: image-width(&quot;img.png&quot;)
+  bg-height: image-height(&quot;img.png&quot;)
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ImageHelpersDimensionsStylus" data-csspre='stylus' data-type="css"  data-local><code>.image
+  bg-size: image-size(&quot;img.png&quot;)
+  bg-width: image-size(&quot;img.png&quot;)[0]
+  bg-height: image-size(&quot;img.png&quot;)[1]
+</code></pre></div><div class="col-6 css"><pre name="css" id="ImageHelpersDimensionsCss"  data-type="css" ><code>.image {
+  bg-size: 20px 10px;
+  bg-width: 20px;
+  bg-height: 10px;
+}
+</code></pre></div></div>
+
+
+
+<h2 id="inline-image">Inline image</h2>
+<p>Encoding images to base64 and inlining them in your stylesheets reduces the number of request a user will make on your site, here&#39;s how to automate the conversion of images to base64.</p>
+<p>Note that for Stylus you need to use <a href="http://learnboost.github.io/stylus/docs/functions.url.html#data-uri-image-inlining">the url function</a>, the positive side is that you can use any name for the function - <code>inline-image</code> is just an example.</p>
+<div class="grid"><div class="col-6 less"><pre name="less" id="ImageHelpersInlineLess" data-csspre='less' data-version='1.4.0' data-type="css"  data-local><code>.image {
+  background-image: data-uri(&quot;pixel.png&quot;);
+}
+</code></pre></div><div class="col-6 scss"><pre name="scss" id="ImageHelpersInlineScss" data-csspre='scss' data-type="css"  data-local><code>.image {
+  background-image: inline-image(&quot;pixel.png&quot;);
+}
+</code></pre></div><div class="col-6 sass"><pre name="sass" id="ImageHelpersInlineSass" data-csspre='sass' data-type="css"  data-local><code>.image
+  background-image: inline-image(&quot;pixel.png&quot;)
+</code></pre></div><div class="col-6 stylus"><pre name="stylus" id="ImageHelpersInlineStylus" data-csspre='stylus' data-type="css"  data-local><code>.image
+  background-image: inline-image(&quot;pixel.png&quot;)
+</code></pre></div><div class="col-6 css"><pre name="css" id="ImageHelpersInlineCss"  data-type="css" ><code>.image {
+  background-image: url(&quot;data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7&quot;)
+}
+</code></pre></div></div>
+</div>
+
+</section>
+<section class="site">
+
+<h2>Interactive</h2>
+<p>This article is far from perfect, you can <a href="https://github.com/futekov/csspre/blob/master/src/documents/image-helpers.html.md.eco" target="_blank">suggest improvements on GitHub</a> or leave a comment below.</p>
+
+<script src="/scripts/code-edit.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/addon/runmode/runmode-standalone.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/mode/css/css.min.js"></script>
+<script>
+  var myNodeList = document.querySelectorAll('pre[data-type="css"] > code');
+  [].forEach.call(myNodeList, function (item) {
+    var codeString = item.textContent;
+    CodeMirror.runMode(codeString, "text/x-scss", item);
+  });
+</script>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'csspre';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+
+  </body>
+</html>
