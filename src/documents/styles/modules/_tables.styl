@@ -26,7 +26,7 @@ th
 
 cell-color($fill, $has-color = true)
   fill: $fill
-  background-color: lighten($fill, 90%)
+  background-color: $fill
   if $has-color == true
     color: darken($fill, 60%)
     .required-version
@@ -37,11 +37,11 @@ td
   position: relative
   background-clip: padding-box
   &.available
-    cell-color(#447B3D)
+    cell-color(#CBFFC5)
   &.partial
     cell-color(#DF9C0C)
   &.not-available
-    cell-color(#A21F1F, false)
+    cell-color(#FAC8F8, false)
 
 .table-content
   -transparent-bg()
